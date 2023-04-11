@@ -1,0 +1,23 @@
+@use "../abstracts/variables" as v;
+
+// Main Font
+@import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@700&display=swap');
+
+html {
+    font-size: 100%;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: v.$font-league;
+    font-size: 2rem;
+    background-color: var(--main-bg);
+
+    // ??? May cause some problems in future 
+    width: 100vw;
+    height: 100vh;
+}
+
+*, *::before, *::after {
+    box-sizing: inherit;
+}
