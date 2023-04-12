@@ -17,8 +17,11 @@ interface ThemeColors {
     result_key_bg: string,
     result_key_shadow: string,
     // text
-    dark_color: string,
-    bright_color: string,
+    header_text: string,
+    key_text: string,
+    action_key_text: string,
+    result_key_text: string,
+
 }
 
 const colors: {[key in Theme]?: ThemeColors} = {
@@ -32,8 +35,10 @@ const colors: {[key in Theme]?: ThemeColors} = {
         action_key_shadow: 'hsl(224, 28%, 35%)',
         result_key_bg: 'hsl(6, 63%, 50%)',
         result_key_shadow: 'hsl(6, 70%, 34%)',
-        dark_color: 'hsl(221, 14%, 31%)',
-        bright_color: 'hsl(0, 0%, 100%)',
+        header_text: 'hsl(0, 0%, 100%)',
+        key_text: 'hsl(221, 14%, 31%)',
+        action_key_text: 'hsl(0, 0%, 100%)',
+        result_key_text: 'hsl(0, 0%, 100%)',
     },
     [Theme.Grey]: {
         main_bg: 'hsl(0, 0%, 90%)',
@@ -45,8 +50,10 @@ const colors: {[key in Theme]?: ThemeColors} = {
         action_key_shadow: 'hsl(185, 58%, 25%)',
         result_key_bg: 'hsl(25, 98%, 40%)',
         result_key_shadow: 'hsl(25, 99%, 27%)',
-        dark_color: 'hsl(60, 10%, 19%)',
-        bright_color: 'hsl(0, 0%, 100%)',
+        header_text: 'hsl(60, 10%, 19%)',
+        key_text: 'hsl(60, 10%, 19%)',
+        action_key_text: 'hsl(0, 0%, 100%)',
+        result_key_text: 'hsl(0, 0%, 100%)',
     },
     [Theme.Violet]: {
         main_bg: 'hsl(268, 75%, 9%)',
@@ -58,8 +65,10 @@ const colors: {[key in Theme]?: ThemeColors} = {
         action_key_shadow: 'hsl(285, 91%, 52%)',
         result_key_bg: 'hsl(176, 100%, 44%)',
         result_key_shadow: 'hsl(177, 92%, 70%)',
-        dark_color: 'hsl(198, 20%, 13%)',
-        bright_color: 'hsl(52, 100%, 62%)',
+        header_text: 'hsl(52, 100%, 62%)',
+        key_text: 'hsl(52, 100%, 62%)',
+        action_key_text: 'hsl(0, 0%, 100%)',
+        result_key_text: 'hsl(198, 20%, 13%)',
     }
 }
 
@@ -81,9 +90,22 @@ function setThemeCssVariables(element: string | HTMLElement, colors: ThemeColors
     }
 }
 
+function getThemeByIndex(index: number): Theme {
+
+    switch(index) {
+        case 1:
+            return Theme.Blue
+        case 2:
+            return Theme.Grey
+        case 3:
+            return Theme.Violet
+    }
+}
+
 export {
     Theme,
     ThemeColors,
     getThemeColors,
-    setThemeCssVariables
+    setThemeCssVariables,
+    getThemeByIndex,
 }

@@ -9,13 +9,16 @@ html {
 }
 
 body {
+    background-color: var(--main-bg);
     font-family: v.$font-league;
     font-size: 2rem;
-    background-color: var(--main-bg);
+    font-weight: 700;
 
+    transition: background-color 300ms ease-in-out;
     // ??? May cause some problems in future 
     width: 100vw;
     height: 100vh;
+    height: 100dvh;
 }
 
 *, *::before, *::after {
