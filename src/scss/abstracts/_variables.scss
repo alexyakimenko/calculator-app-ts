@@ -1,5 +1,5 @@
 /*
-    available css variables:
+    available css variables (they come from ts/theme.ts):
         --main-bg 
         --toggle-bg 
         --screen-bg 
@@ -8,9 +8,11 @@
         --action-key-bg 
         --action-key-shadow 
         --result-key-bg 
-        --result-key-shadow t
-        --dark-color 
-        --bright-color
+        --result-key-shadow
+        --header-text
+        --key-text
+        --action-key-text
+        --result-key-text
 */
 
 $font-league: 'League Spartan', sans-serif;
