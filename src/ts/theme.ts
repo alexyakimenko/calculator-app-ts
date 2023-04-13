@@ -1,7 +1,7 @@
 enum Theme {
-    Blue = 'blue',
-    Grey = 'grey',
-    Violet = 'violet',
+    Blue = '1',
+    Grey = '2',
+    Violet = '3',
 }
 
 interface ThemeColors {
@@ -76,36 +76,65 @@ function getThemeColors(theme: Theme): ThemeColors {
     return colors[theme]
 }
 
-function setThemeCssVariables(element: string | HTMLElement, colors: ThemeColors): void {
-    let targetElement: HTMLElement;
-    if(typeof element === 'string') {
-        targetElement = document.querySelector(element)
-    } else {
-        targetElement = element
-    }
+// Theme Control Class
 
-    for(let key in colors) {
-        let property = key.replace(/_/g, '-')
-        targetElement.style.setProperty(`--${property}`, colors[key])
-    }
+interface InitialValues {
+    theme?: Theme,
+    cssVarElement?: string | HTMLElement,
 }
 
-function getThemeByIndex(index: number): Theme {
+class ThemeControl {
+    private theme: Theme
+    private themeColors: ThemeColors
+    private varElement: HTMLElement
 
-    switch(index) {
-        case 1:
-            return Theme.Blue
-        case 2:
-            return Theme.Grey
-        case 3:
-            return Theme.Violet
+    constructor(init: InitialValues) {
+        if(init.theme) {
+            localStorage.setItem('theme', init.theme)
+        } else {
+            if(!localStorage.getItem('theme')) {
+                localStorage.setItem('theme', '1' as Theme)
+            }
+        }
+
+        if(typeof init.cssVarElement === 'string') {
+            try {
+                this.varElement = document.querySelector(init.cssVarElement)
+            } catch(e) {
+                console.error(e, 'Default element will be used -> :root')
+                this.varElement = document.body.parentElement
+            }
+        } else {
+            this.varElement = init.cssVarElement
+        }
+
+        this.setTheme(localStorage.getItem('theme') as Theme)
+    }
+
+    setTheme(newTheme: Theme): void {
+        if(newTheme === this.theme) return
+
+        this.theme = newTheme
+        this.themeColors = getThemeColors(newTheme)
+
+        this.setThemeCssVariables()
+
+        localStorage.setItem('theme', this.theme)
+    }
+
+    getTheme(): Theme {
+        return this.theme
+    }
+
+    private setThemeCssVariables(): void {
+        for(let key in this.themeColors) {
+            let property = key.replace(/_/g, '-')
+            this.varElement.style.setProperty(`--${property}`, this.themeColors[key])
+        }
     }
 }
 
 export {
     Theme,
-    ThemeColors,
-    getThemeColors,
-    setThemeCssVariables,
-    getThemeByIndex,
+    ThemeControl,
 }
