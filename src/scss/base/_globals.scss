@@ -14,6 +14,10 @@ body {
     font-size: 2rem;
     font-weight: 700;
 
+    // Exprerimental features
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+
     transition: background-color 300ms ease-in-out;
     // ??? May cause some problems in future 
     width: 100vw;
