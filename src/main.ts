@@ -1,7 +1,7 @@
 import './main.scss'
 import {Theme, ThemeControl} from "./ts/theme"
 
-// Set Theme  
+// Initialize Theme  
 const body: HTMLBodyElement = document.querySelector('body')
 let themeControl: ThemeControl = new ThemeControl({cssVarElement: body});
 
@@ -20,4 +20,15 @@ themeLabels.forEach(item => {
         themeControl.setTheme(item.getAttribute('data-theme-index') as Theme)
         themeToggler.value = item.getAttribute('data-theme-index')
     })
+})
+
+// Screen Logic
+const screen: HTMLInputElement = document.querySelector(".calc__screen")
+document.addEventListener('keydown', (event) => {
+    event.preventDefault()
+    if(event.key.toLowerCase() === "backspace") {
+        screen.value = ''
+        return
+    }
+    screen.value += event.key.replace(/\D/g, '')
 })

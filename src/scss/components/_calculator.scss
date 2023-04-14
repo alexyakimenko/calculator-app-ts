@@ -74,4 +74,32 @@
             }
         }
     }
+
+    &__screen {
+        &__wrapper {
+            margin-top: 1.75rem;
+            // Temp
+            // background: rgba(0,0,0, 0.5);
+
+            height: 5.5rem;
+        }
+
+        width: 100%;
+        height: 100%;
+
+        padding-right: 1.625rem;
+
+        border-radius: .5rem;
+        border: none;
+        outline: none;
+        background-color: var(--screen-bg);
+        transition: background-color 300ms ease-out, color 300ms ease-in-out;
+
+        // Font styles
+        text-align: right;
+        font-weight: inherit;
+        font-size: inherit;
+        font-family: inherit;
+        color: var(--header-text);
+    }
 }
