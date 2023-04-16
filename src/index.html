@@ -21,27 +21,27 @@
                 </div>
             </div>
             <div class="calc__screen__wrapper">
-                <input type="text" class="calc__screen" id="calcScreen" readonly>
+                <input type="text" class="calc__screen" id="calcScreen" value="0" readonly>
             </div>
             <div class="calc__controls">
-                <button class="calc__key">7</button>
-                <button class="calc__key">8</button>
-                <button class="calc__key">9</button>
-                <button class="calc__key key--backspace">del</button>
-                <button class="calc__key">4</button>
-                <button class="calc__key">5</button>
-                <button class="calc__key">6</button>
-                <button class="calc__key">+</button>
-                <button class="calc__key">1</button>
-                <button class="calc__key">2</button>
-                <button class="calc__key">3</button>
-                <button class="calc__key">-</button>
-                <button class="calc__key">.</button>
-                <button class="calc__key">0</button>
-                <button class="calc__key">/</button>
-                <button class="calc__key">x</button>
-                <button class="calc__key key--reset">reset</button>
-                <button class="calc__key key--result">=</button>
+                <button class="calc__key" data-type="number">7</button>
+                <button class="calc__key" data-type="number">8</button>
+                <button class="calc__key" data-type="number">9</button>
+                <button class="calc__key key--backspace" data-type="action" data-action="delete">del</button>
+                <button class="calc__key" data-type="number">4</button>
+                <button class="calc__key" data-type="number">5</button>
+                <button class="calc__key" data-type="number">6</button>
+                <button class="calc__key" data-type="operator" data-op="+">+</button>
+                <button class="calc__key" data-type="number">1</button>
+                <button class="calc__key" data-type="number">2</button>
+                <button class="calc__key" data-type="number">3</button>
+                <button class="calc__key" data-type="operator" data-op="-">-</button>
+                <button class="calc__key" data-type="f_point">.</button>
+                <button class="calc__key" data-type="number">0</button>
+                <button class="calc__key" data-type="operator" data-op="/">/</button>
+                <button class="calc__key" data-type="operator" data-op="*">x</button>
+                <button class="calc__key key--reset" data-type="action" data-action="reset">reset</button>
+                <button class="calc__key key--result" data-type="action" data-action="result">=</button>
             </div>
         </div>
     </div>
