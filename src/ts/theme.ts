@@ -111,7 +111,7 @@ class ThemeControl {
         this.setTheme(localStorage.getItem('theme') as Theme)
     }
 
-    setTheme(newTheme: Theme): void {
+    public setTheme(newTheme: Theme): void {
         if(newTheme === this.theme) return
 
         this.theme = newTheme
@@ -122,7 +122,7 @@ class ThemeControl {
         localStorage.setItem('theme', this.theme)
     }
 
-    getTheme(): Theme {
+    public getTheme(): Theme {
         return this.theme
     }
 
