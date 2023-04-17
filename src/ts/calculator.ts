@@ -13,6 +13,8 @@ class Calculator {
 
     constructor(screen: HTMLInputElement) {
         this.screen = screen
+        this.value = localStorage.getItem('screenValue') || '0'
+
         screen.value.length ? this.value = screen.value : screen.value = this.value
     }
 
@@ -37,8 +39,9 @@ class Calculator {
             default:
                 return
         }
-
-       this.screen.value = this.value
+        
+        this.screen.value = this.value
+        localStorage.setItem('screenValue', this.value)
     }
 
     private handleNumber(key: Element) {
@@ -104,7 +107,14 @@ class Calculator {
             case 'reset':
                 this.value = '0'
                 break
-            case 'delete': 
+            case 'delete':
+                const expression: string[] = this.value.split(/(\/|\+|\-|\*)/)
+                const lastNumber: string = expression[expression.length-1] || ''
+                // Local storage Infinity bug fix
+                if(lastNumber.match(/[a-zA-Z]/)) {
+                    this.value = this.value.slice(0, -lastNumber.length+1)
+                }
+
                 if(this.value === this.lastResult) {
                     this.value = '0'
                     return
