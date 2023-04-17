@@ -164,5 +164,10 @@
             box-shadow: none;
             transform: translateY(.25rem);
         }
+
+        &.active {
+            box-shadow: none;
+            transform: translateY(.25rem);
+        }
     }
 }

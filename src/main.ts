@@ -24,52 +24,29 @@ themeLabels.forEach(item => {
 })
 
 
-const keys: NodeListOf<HTMLButtonElement> = document.querySelectorAll('.calc__key')
-// Screen Logic
-const screen: HTMLInputElement = document.querySelector(".calc__screen")
-document.addEventListener('keydown', (event) => {
-    event.preventDefault()
-    console.log(event.key)
-    keys.forEach(item => {
-        let dataType: string = item.getAttribute('data-type')
-        if(dataType === 'number' || dataType === 'f_point') {
-            if(item.textContent === event.key) {
-                item.click()
-                item.style.transform = 'translateY(0.25rem)'
-            }
-        } else if(dataType === 'operator') {
-            if(item.getAttribute('data-op') === event.key) {
-                item.click()
-                item.style.transform = 'translateY(0.25rem)'
-            }
-        } else if(dataType === 'action') {
-            let dataAction = item.getAttribute('data-action')
-            if(dataAction === 'delete' && event.key === 'Backspace') {
-               item.click()
-               item.style.transform = 'translateY(0.25rem)'
-            } else 
-            if(dataAction === 'reset' && event.key === 'Escape') {
-               item.click()
-               item.style.transform = 'translateY(0.25rem)'
-            } else
-            if(dataAction === 'result' && event.key === 'Enter') {
-               item.click()
-               item.style.transform = 'translateY(0.25rem)'
-            }
-        }
-    })
-})
-document.addEventListener('keyup', (event) => {
-    event.preventDefault()
-    keys.forEach(item => {
-        item.removeAttribute('style')
-    })
-})
-
-
 // Calc Controls Logic
+const keys: NodeListOf<HTMLButtonElement> = document.querySelectorAll('.calc__key')
+const screen: HTMLInputElement = document.querySelector(".calc__screen")
 const calcKeys: HTMLDivElement = document.querySelector(".calc__controls")
 
 let calc = new Calculator(screen)
 
 calcKeys.addEventListener('click', (event) => calc.clickHandler(event.target))
+document.addEventListener('keydown', toggleActiveClass)
+document.addEventListener('keyup', toggleActiveClass)
+
+function toggleActiveClass(event: KeyboardEvent) {
+    keys.forEach(item => {
+        if(
+            item.getAttribute('data-content') === event.key || 
+            item.getAttribute('data-op') === event.key ||
+            item.getAttribute('data-action') === 'delete' && event.key === "Backspace" || 
+            item.getAttribute('data-action') === 'reset' && event.key === 'Escape' ||
+            item.getAttribute('data-action') === 'result' && event.key === 'Enter'
+        ) {
+            item.click()
+            event.type === 'keydown' ? item.classList.add('active') : item.classList.remove('active')
+        }
+    })
+
+}
