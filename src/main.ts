@@ -49,9 +49,11 @@ function toggleActiveClass(event: KeyboardEvent) {
         event.key === "Escape") ||
       (item.getAttribute("data-action") === "result" && event.key === "Enter")
     ) {
-      item.click();
       event.type === "keydown"
-        ? item.classList.add("active")
+        ? (() => {
+          item.classList.add("active")
+          item.click();
+        })()
         : item.classList.remove("active");
     }
   });

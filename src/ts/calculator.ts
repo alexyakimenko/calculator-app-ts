@@ -56,6 +56,10 @@ class Calculator {
     // Regex
     const expression: string[] = this.value.split(/(\/|\+|\-|\*)/);
     const lastNumber: string = expression[expression.length - 1] || "";
+    // Local storage Infinity bug fix
+    if (lastNumber.match(/[a-zA-Z]/)) {
+      this.value = this.value.slice(0, -lastNumber.length);
+    }
 
     if (lastNumber === "0") {
       this.value = this.value.slice(0, -1) + keyContent;
