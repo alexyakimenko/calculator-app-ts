@@ -31,7 +31,7 @@ document.addEventListener('keydown', (event) => {
     console.log(event.key)
     keys.forEach(item => {
         let dataType: string = item.getAttribute('data-type')
-        if(dataType === 'number') {
+        if(dataType === 'number' || dataType === 'f_point') {
             if(item.textContent === event.key) {
                 item.click()
                 item.style.transform = 'translateY(0.25rem)'
@@ -79,6 +79,7 @@ calcKeys.addEventListener('click', (event) => {
         let el: Element = event.target
         let dataType: string = el.getAttribute('data-type')
         let lastChar: string = calcValue[calcValue.length-1] || ''
+        let lastSecondChar: string = calcValue[calcValue.length-2] || '' 
         if(dataType === 'number') {
             if(calcValue === lastResult) {
                 calcValue = '0'
@@ -89,16 +90,21 @@ calcKeys.addEventListener('click', (event) => {
             if(calcValue === '0') {
                 calcValue = el.textContent
             } else {
-                if(Number.isNaN(+lastChar) && lastChar !== '.') {
+                if(lastChar.match(/(\/|\+|\-|\*)/)) {
                     calcValue += el.textContent
                 } else {
-
-                calcValue += el.textContent
+                    if(lastSecondChar.match(/(\/|\+|\-|\*)/) && lastChar === '0') {
+                        calcValue = calcValue.slice(0,-1) + el.textContent
+                        lastChar = el.textContent
+                    } else {
+                        calcValue += el.textContent
+                    }
                 }
             }
         } else if(dataType === 'f_point') {
             if(calcValue === lastResult) {
                 calcValue = '0'
+                lastChar = '0'
             }
             if(lastChar !== '.') {
                 if(!Number.isNaN(+lastChar)) {
