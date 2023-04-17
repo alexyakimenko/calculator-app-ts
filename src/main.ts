@@ -51,9 +51,9 @@ function toggleActiveClass(event: KeyboardEvent) {
     ) {
       event.type === "keydown"
         ? (() => {
-          item.classList.add("active")
-          item.click();
-        })()
+            item.classList.add("active");
+            item.click();
+          })()
         : item.classList.remove("active");
     }
   });
