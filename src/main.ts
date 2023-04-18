@@ -47,7 +47,9 @@ function toggleActiveClass(event: KeyboardEvent) {
         event.key === "Backspace") ||
       (item.getAttribute("data-action") === "reset" &&
         event.key === "Escape") ||
-      (item.getAttribute("data-action") === "result" && event.key === "Enter")
+      (item.getAttribute("data-action") === "result" &&
+        event.key === "Enter") ||
+      (item.getAttribute("data-action") === "result" && event.key === "=")
     ) {
       event.type === "keydown"
         ? (() => {
