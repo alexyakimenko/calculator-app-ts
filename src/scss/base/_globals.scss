@@ -13,7 +13,7 @@ body {
   font-family: v.$font-league;
   font-size: 2rem;
   font-weight: 700;
-
+  overflow-x: hidden;
   // Exprerimental features
   -webkit-tap-highlight-color: transparent;
   user-select: none;
