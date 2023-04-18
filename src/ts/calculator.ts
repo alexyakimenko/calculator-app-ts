@@ -14,6 +14,7 @@ class Calculator {
   constructor(screen: HTMLInputElement) {
     this.screen = screen;
     this.value = localStorage.getItem("screenValue") || "0";
+    this.lastResult = this.value
 
     screen.value.length
       ? (this.value = screen.value)
@@ -56,10 +57,6 @@ class Calculator {
     // Regex
     const expression: string[] = this.value.split(/(\/|\+|\-|\*)/);
     const lastNumber: string = expression[expression.length - 1] || "";
-    // Local storage Infinity bug fix
-    if (lastNumber.match(/[a-zA-Z]/)) {
-      this.value = this.value.slice(0, -lastNumber.length);
-    }
 
     if (lastNumber === "0") {
       this.value = this.value.slice(0, -1) + keyContent;
@@ -70,16 +67,16 @@ class Calculator {
   }
   private handlePoint(key: Element) {
     const keyContent: string = key.getAttribute("data-content");
+
+    if (this.value === this.lastResult) {
+      this.value = "0";
+    }
     // Regex
     const expression: string[] = this.value.split(/(\/|\+|\-|\*)/);
     const re: RegExp = new RegExp(keyContent, "g");
     const dots: string[] = expression[expression.length - 1].match(re) || [];
 
     if (dots.length > 1) return;
-
-    if (this.value === this.lastResult) {
-      this.value = "0";
-    }
 
     if (this.isOperator(this.getLastChar(this.value))) {
       this.value += "0" + keyContent;
@@ -113,14 +110,6 @@ class Calculator {
         this.value = "0";
         break;
       case "delete":
-        const expression: string[] = this.value.split(/(\/|\+|\-|\*)/);
-        const lastNumber: string = expression[expression.length - 1] || "";
-
-        // Local storage Infinity bug fix
-        if (lastNumber.match(/[a-zA-Z]/)) {
-          this.value = this.value.slice(0, -lastNumber.length + 1);
-        }
-
         if (this.value === this.lastResult) {
           this.value = "0";
           return;
