@@ -1,5 +1,16 @@
+@use "../abstracts" as abs;
+
 .calc {
-    
+  transform: scale(0.8);
+
+  @include abs.mq-sm {
+    transform: scale(1);
+  }
+
+  @include abs.mq-lg {
+    transform: scale(1.2);
+  }
+
   &__header {
     display: flex;
     justify-content: space-between;

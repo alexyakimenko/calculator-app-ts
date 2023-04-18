@@ -1,0 +1,11 @@
+@mixin mq-lg {
+  @media screen and (min-width: 62rem) {
+    @content;
+  }
+}
+
+@mixin mq-sm {
+  @media screen and (min-width: 23.5rem) {
+    @content;
+  }
+}
